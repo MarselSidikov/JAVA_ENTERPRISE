@@ -1,0 +1,20 @@
+https://vk.com/marsel_sidikov
+Сидиков Марсель Рафаэлевич
+
+1) JDK 1.8
+2) IntelliJ IDEA 2017.2.2
+3) PostgeSQL
+4) Tomcat
+
+Курс:
+1) Архитектура корп. систем
+2) Клиент-серверная архитектура
+3) Паттерны проектирования
+4) Java Core
+5) Maven
+6) Spring
+7) JDBC, ORM, JPA
+8) HTML, CSS, JS
+9) Node.js
+10) Freemarker
+
