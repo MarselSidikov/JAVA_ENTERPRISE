@@ -15,7 +15,6 @@ import java.sql.Statement;
 public class Program {
     public static void main(String[] args) {
         Connection connection = null;
-        Object o; o.equals()
         try {
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/java_enterprise_db",
