@@ -43,10 +43,17 @@ SOLID - это круто
 HumansDao humansDao = new HumansDaoJdbcImpl(connection);
 C консоли считать человека
 и сохранить через save
-humansDao.save(human); 
+humansDao.save(human);
+
+Связи
+https://github.com/MarselSidikov/CINEMA/wiki/DataBase 
 
 
-
+ДЗ:
+CRUD в maven + findAll + lombock
+Повторить связи
+Сформулировать ворпосы, если что не понятно
+Придумать БД для своего проекта
 
 
 
