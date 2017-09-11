@@ -35,6 +35,9 @@ public class Program {
             humansDao.save(human);
             System.out.println(human.getId());
 
+            Human marsel = humansDao.find(1L);
+            System.out.println(marsel.getName() + " " + marsel.getAge());
+
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
