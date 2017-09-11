@@ -1,4 +1,4 @@
-https://vk.com/marsel_sidikov
+﻿https://vk.com/marsel_sidikov
 Сидиков Марсель Рафаэлевич
 
 1) JDK 1.8
@@ -36,3 +36,25 @@ SOLID - это круто
 При нажатии Добавить вводите данные сущности и добавляете в БД.
 
 - Посмотреть список сущностей прям в консоли
+
+1) Реализовать таблицу для людей
+2) Модель Human - equals
+3) В Main создать connection, его передать HumansDao
+HumansDao humansDao = new HumansDaoJdbcImpl(connection);
+C консоли считать человека
+и сохранить через save
+humansDao.save(human); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
