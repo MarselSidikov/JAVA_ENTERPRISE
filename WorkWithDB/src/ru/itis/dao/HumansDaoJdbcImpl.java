@@ -4,6 +4,7 @@ import ru.itis.models.Human;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -17,6 +18,10 @@ public class HumansDaoJdbcImpl implements HumansDao {
 
     private Connection connection;
 
+    //language=SQL
+    private final static String SQL_INSERT_OWNER =
+    "INSERT INTO owner(name, age, color) VALUES (?,?,?)";
+
     public HumansDaoJdbcImpl(Connection connection) {
         this.connection = connection;
     }
@@ -25,11 +30,21 @@ public class HumansDaoJdbcImpl implements HumansDao {
     public void save(Human model) {
         try {
             PreparedStatement statement =
-                    connection.prepareStatement("INSERT INTO owner(name, age, color) VALUES (?,?,?)");
+                    connection.prepareStatement(SQL_INSERT_OWNER,
+                            new String[] {"id"});
             statement.setString(1, model.getName());
             statement.setInt(2, model.getAge());
             statement.setString(3, model.getColor());
-            statement.execute();
+            statement.executeUpdate();
+
+            // получаем указатель на результирующие строки
+            // результирующие строки - сгенерированный id
+            ResultSet resultSet = statement.getGeneratedKeys();
+            // одновременно сдвигаем итератор и проверяем есть там че или нет
+            if (resultSet.next()) {
+                long id = resultSet.getLong(1);
+                model.setId(id);
+            }
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }

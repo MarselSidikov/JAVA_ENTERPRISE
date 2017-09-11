@@ -1,5 +1,9 @@
 package ru.itis;
 
+import ru.itis.dao.HumansDao;
+import ru.itis.dao.HumansDaoJdbcImpl;
+import ru.itis.models.Human;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,11 +23,18 @@ public class Program {
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/java_enterprise_db",
                     "postgres",
-                    "qwerty007"
-            );
-            Statement statement = connection.createStatement();
-            statement
-                    .execute("INSERT INTO owner(name, age, color) VALUES('Максим', 18, 'White')");
+                    "qwerty007");
+
+            HumansDao humansDao = new HumansDaoJdbcImpl(connection);
+            Human human = new Human.Builder()
+                    .name("Гена")
+                    .color("Зеленый")
+                    .age(99)
+                    .build();
+
+            humansDao.save(human);
+            System.out.println(human.getId());
+
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
