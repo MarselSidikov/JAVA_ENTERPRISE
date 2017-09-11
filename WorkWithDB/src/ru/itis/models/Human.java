@@ -8,4 +8,25 @@ package ru.itis.models;
  * @version v1.0
  */
 public class Human {
+
+    private Long id;
+    private String name;
+    private int age;
+    private String color;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getColor() {
+        return color;
+    }
 }

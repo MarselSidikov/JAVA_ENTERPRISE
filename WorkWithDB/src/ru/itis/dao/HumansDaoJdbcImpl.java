@@ -3,6 +3,8 @@ package ru.itis.dao;
 import ru.itis.models.Human;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * 11.09.2017
@@ -21,7 +23,16 @@ public class HumansDaoJdbcImpl implements HumansDao {
 
     @Override
     public void save(Human model) {
-
+        try {
+            PreparedStatement statement =
+                    connection.prepareStatement("INSERT INTO owner(name, age, color) VALUES (?,?,?)");
+            statement.setString(1, model.getName());
+            statement.setInt(2, model.getAge());
+            statement.setString(3, model.getColor());
+            statement.execute();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Override
