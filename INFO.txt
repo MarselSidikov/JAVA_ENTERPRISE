@@ -64,7 +64,8 @@ Dao на все модели
 Связи - один к одному, один ко многим, многие ко многие
 
 
-
+https://github.com/MarselSidikov/JAVA_IT_PARK_WORK_2/tree/master/Chat
+https://github.com/MarselSidikov/JAVA_IT_PARK_WORK_2/tree/master/StaticServer
 
 
 
