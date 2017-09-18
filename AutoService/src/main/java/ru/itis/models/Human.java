@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
+@ToString
 public class Human {
     private Long id;
     private String name;

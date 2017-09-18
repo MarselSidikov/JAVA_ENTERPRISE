@@ -68,7 +68,7 @@ public class HumansDaoJdbcImpl implements HumansDao {
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new Human.Builder()
+                return Human.builder()
                         .id(resultSet.getLong("id"))
                         .name(resultSet.getString("name"))
                         .color(resultSet.getString("color"))
