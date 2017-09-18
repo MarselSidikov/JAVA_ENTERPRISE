@@ -1,18 +1,20 @@
 package ru.itis.dao;
 
+import com.google.common.collect.Lists;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import ru.itis.models.Auto;
 import ru.itis.models.Human;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 18.09.2017
@@ -27,27 +29,59 @@ public class HumansDaoJdbcTemplateImpl implements HumansDao {
             "INSERT INTO owner(name, age, color) VALUES (?,?,?)";
 
     private final static String SQL_SELECT_OWNER_BY_ID =
-            "SELECT * FROM owner WHERE owner.id = ?";
+            "SELECT * FROM owner, auto WHERE auto.owner_id = owner.id AND owner.id = ?";
 
     private final static String SQL_SELECT_ALL =
-            "SELECT * FROM owner";
+            "SELECT * FROM owner " +
+                    "  LEFT JOIN auto ON owner.id = auto.owner_id;";
+
+    private final static String SQL_SELECT_ALL_BY_COLOR_OR_AGE =
+            "SELECT * FROM owner WHERE color = :color OR " +
+                    "age = :age";
 
     private JdbcTemplate template;
+    private NamedParameterJdbcTemplate namedParameterTemplate;
+
+    private Map<Long, Human> humans;
 
     public HumansDaoJdbcTemplateImpl(DataSource dataSource) {
         this.template = new JdbcTemplate(dataSource);
+        this.namedParameterTemplate = new NamedParameterJdbcTemplate(dataSource);
+        this.humans = new HashMap<>();
     }
 
-    private RowMapper<Human> humanRowMapper = (resultSet, rowNumber) -> Human.builder()
-            .id(resultSet.getLong("id"))
-            .age(resultSet.getInt("age"))
-            .color(resultSet.getString("color"))
-            .name(resultSet.getString("name"))
-            .build();
+    private RowMapper<Human> humanRowMapper = (resultSet, rowNumber) -> {
+        // смотрим id текущего пользователя
+        Long currentOwnerId = resultSet.getLong(1);
+        // если такой пользователь еще не был зарегистрирован - кладем его в map
+        if (humans.get(currentOwnerId) == null) {
+                    humans.put(currentOwnerId,Human.builder()
+                            .id(currentOwnerId)
+                            .name(resultSet.getString(2))
+                            .age(resultSet.getInt(3))
+                            .color(resultSet.getString(4))
+                            .autos(Lists.newArrayList())
+                            .build());
+        }
+        // вытаскиваем машину, кладем хозяина
+        if (resultSet.getLong(5) != 0) {
+            Auto auto = Auto.builder()
+                    .id(resultSet.getLong(5))
+                    .color(resultSet.getString(6))
+                    .model(resultSet.getString(7))
+                    .owner(humans.get(currentOwnerId))
+                    .build();
+            humans.get(currentOwnerId).getAutos().add(auto);
+        }
+        return humans.get(currentOwnerId);
+    };
 
     @Override
     public List<Human> findAll() {
-        return template.query(SQL_SELECT_ALL, humanRowMapper);
+        template.query(SQL_SELECT_ALL, humanRowMapper);
+        List<Human> result = Lists.newArrayList(humans.values());
+        humans.clear();
+        return result;
     }
 
     @Override
@@ -69,8 +103,10 @@ public class HumansDaoJdbcTemplateImpl implements HumansDao {
 
     @Override
     public Human find(Long id) {
-        return template.query(SQL_SELECT_OWNER_BY_ID,
+        Human result = template.query(SQL_SELECT_OWNER_BY_ID,
                 new Long[]{id}, humanRowMapper).get(0);
+        humans.clear();
+        return result;
     }
 
     @Override
@@ -81,5 +117,14 @@ public class HumansDaoJdbcTemplateImpl implements HumansDao {
     @Override
     public void update(Human model) {
 
+    }
+
+    @Override
+    public List<Human> findAllByColorOrAge(String color, int age) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("color", color);
+        params.put("age", age);
+        return namedParameterTemplate.query(SQL_SELECT_ALL_BY_COLOR_OR_AGE,
+                params, humanRowMapper);
     }
 }

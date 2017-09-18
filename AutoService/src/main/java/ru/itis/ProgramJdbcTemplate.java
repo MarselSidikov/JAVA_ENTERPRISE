@@ -31,6 +31,7 @@ public class ProgramJdbcTemplate {
 
         List<Human> humans = humansDao.findAll();
         System.out.println(humans);
-        System.out.println(humansDao.find(13L));
+        System.out.println(humansDao.find(1L));
+        //System.out.println(humansDao.findAllByColorOrAge("White", 19));
     }
 }

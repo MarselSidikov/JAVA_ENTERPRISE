@@ -1,6 +1,7 @@
 package ru.itis.dao;
 
 import ru.itis.models.Human;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,5 +89,10 @@ public class HumansDaoJdbcImpl implements HumansDao {
     @Override
     public void update(Human model) {
 
+    }
+
+    @Override
+    public List<Human> findAllByColorOrAge(String color, int age) {
+        throw new NotImplementedException();
     }
 }

@@ -2,6 +2,8 @@ package ru.itis.models;
 
 import lombok.*;
 
+import java.util.List;
+
 /**
  * 11.09.2017
  * Human
@@ -20,4 +22,5 @@ public class Human {
     private String name;
     private int age;
     private String color;
+    private List<Auto> autos;
 }
