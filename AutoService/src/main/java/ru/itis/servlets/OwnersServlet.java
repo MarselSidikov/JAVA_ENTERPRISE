@@ -40,15 +40,17 @@ public class OwnersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         List<Human> humans = humansDao.findAll();
-        writer.write("<table>");
-        for (Human human : humans) {
-            writer.write("<tr>");
-            writer.write("<td>" + human.getName() + "</td>");
-            writer.write("<td>" + human.getAge() + "</td>");
-            writer.write("</tr>");
-        }
-        writer.write("</table>");
+//        PrintWriter writer = resp.getWriter();
+//        writer.write("<table>");
+//        for (Human human : humans) {
+//            writer.write("<tr>");
+//            writer.write("<td>" + human.getName() + "</td>");
+//            writer.write("<td>" + human.getAge() + "</td>");
+//            writer.write("</tr>");
+//        }
+//        writer.write("</table>");
+        req.setAttribute("owners", humans);
+        req.getRequestDispatcher("/WEB-INF/jsp/owners.jsp").forward(req, resp);
     }
 }
