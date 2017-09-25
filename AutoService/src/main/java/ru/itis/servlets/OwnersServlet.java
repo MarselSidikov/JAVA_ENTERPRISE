@@ -53,4 +53,17 @@ public class OwnersServlet extends HttpServlet {
         req.setAttribute("owners", humans);
         req.getRequestDispatcher("/WEB-INF/jsp/owners.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Human human = Human.builder()
+                .name(req.getParameter("name"))
+                .age(Integer.parseInt(req.getParameter("age")))
+                .color(req.getParameter("color"))
+                .build();
+        humansDao.save(human);
+
+        req.setAttribute("owners", humansDao.findAll());
+        req.getRequestDispatcher("/WEB-INF/jsp/owners.jsp").forward(req, resp);
+    }
 }

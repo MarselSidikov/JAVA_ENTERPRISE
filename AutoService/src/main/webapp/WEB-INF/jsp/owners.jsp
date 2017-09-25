@@ -36,5 +36,11 @@
         </tr>
     </c:forEach>
 </table>
+<form method="post" action="/owners">
+    <input type="text" name="name">
+    <input type="text" name="age">
+    <input type="text" name="color">
+    <input type="submit">
+</form>
 </body>
 </html>
