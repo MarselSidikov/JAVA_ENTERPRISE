@@ -7,6 +7,7 @@
     <groupId>ru.itis</groupId>
     <artifactId>auto-service</artifactId>
     <version>0.1</version>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -31,6 +32,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>23.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
         </dependency>
     </dependencies>
 
