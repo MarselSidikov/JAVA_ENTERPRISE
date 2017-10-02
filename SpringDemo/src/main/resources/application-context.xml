@@ -3,11 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--описание бина с зависимостью-->
     <bean id="messageRenderer" class="MessageRendererErrorOutputImpl">
         <constructor-arg name="message" ref="message"/>
     </bean>
-
+    <!--Описание бина как экземпляра какого-либо класса-->
+    <!--Описание бина состоит из идентификатора, а также из класса,
+    экземпляром которого является бин-->
     <bean id="message" class="MessageLogImpl">
+        <!--Указываем аргумент конструктора класса-->
         <constructor-arg name="text" value="From Spring bye"/>
     </bean>
 </beans>
