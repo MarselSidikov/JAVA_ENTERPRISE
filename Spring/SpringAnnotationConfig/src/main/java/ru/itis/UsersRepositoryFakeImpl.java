@@ -1,0 +1,18 @@
+package ru.itis;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+/**
+ * 03.11.2017
+ * ru.UsersRepositoryFakeImpl
+ *
+ * @author Sidikov Marsel (First Software Engineering Platform)
+ * @version v1.0
+ */
+@Repository
+public class UsersRepositoryFakeImpl implements UsersRepository {
+    public void save(String name) {
+        System.out.println(name + " saved");
+    }
+}
