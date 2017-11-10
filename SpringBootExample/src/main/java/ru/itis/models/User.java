@@ -34,4 +34,10 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
     private Set<Auto> autos;
+
+    @Column(unique = true)
+    private String login;
+
+    private String hashPassword;
+
 }

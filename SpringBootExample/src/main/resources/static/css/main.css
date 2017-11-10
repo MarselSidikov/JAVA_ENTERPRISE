@@ -1,0 +1,232 @@
+@font-face {
+    font-family: sceptica;
+    src: url("/fonts/Sceptica.otf");
+}
+
+@font-face {
+    font-family: sceptica-black;
+    src: url("/fonts/Sceptica-Black.otf");
+}
+
+@font-face {
+    font-family: sceptica-bold;
+    src: url("/fonts/Sceptica-Bold.otf");
+}
+
+@font-face {
+    font-family: sceptica-light;
+    src: url("/fonts/Sceptica-Light.otf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, sans-serif;
+}
+
+h1 {
+    color: #79ad3e;
+}
+
+th {
+    cursor: pointer;
+}
+
+th, td {
+    padding: 10px 18px !important;
+}
+
+select {
+    padding-left: 7px !important;
+}
+
+#content {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.page-header {
+    margin: 10px 0 20px !important;
+}
+
+.table-title {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.partners-table-top {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+thead {
+    background: #79ad3e;
+    color: #fff;
+}
+
+.button_bg {
+    background: #5a9aad !important;
+    border: 0 !important;
+    outline: none;
+}
+
+.colors {
+    color: #42d1ff;
+    color: #5a9aad;
+    color: #8aff05;
+    color: #79ad3e;
+    color: #f0d80a;
+    color: #a1953d;
+}
+
+.login-page {
+    border: 1px solid #ccc;
+    max-width: 450px !important;
+    min-width: 300px !important;
+    margin: 20px auto auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 20px !important;
+}
+
+.login-logo {
+    width: 250px;
+    margin: 5px auto 20px;
+}
+
+.login-logo img {
+    width: 250px;
+}
+
+.set-password-title {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.header-item-right {
+    float: right !important;
+}
+
+.header-item {
+    float: left;
+    display: inline-block;
+    height: 47px;
+    line-height: 1;
+    margin-top: 16px;
+    margin-bottom: -17px;
+    cursor: pointer;
+}
+
+.header-item img {
+    max-width: 125px;
+    margin-top: -17px !important;
+    padding: 5px;
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    -ms-interpolation-mode: nearest-neighbor; /* IE */
+    image-rendering: crisp-edges; /* Стандартное свойство */
+    max-height: 47px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    text-decoration: none;
+    color: #fff;
+    background: #79ad3e;
+}
+
+.navbar-default {
+    background-color: #ffffff !important;
+    border-color: #42aaff !important;
+    border: none;
+    border-bottom: 1px solid #42d1ff;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.header-item a {
+    padding: 15px;
+    color: #5a9aad;
+}
+
+.edit-partner-button, .delete-classroom-button {
+    cursor: pointer;
+}
+
+.delete-classroom-button {
+    color: #f31616;
+}
+
+#new-partner-error, #new-student-error, #new-teacher-error, #new-discipline-error, #new-course-error, #new-classroom-error, #new-lesson-error, #edit-lesson-error, #new-olympiad-error {
+    display: none;
+}
+
+#edit-partner-error {
+    display: none;
+}
+
+.dropdown-margin-top {
+    margin-top: -17px !important;
+}
+
+.main {
+    /*padding-top: 10px;*/
+}
+
+.hello-page {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hello-page img {
+    width: 100%;
+    max-width: 350px;
+    margin-top: 20px;
+}
+
+.schedule-current-day {
+    font-size: 18px;
+    padding-right: 15px;
+}
+
+.schedule-current-day-number {
+    font-size: 40px;
+    margin-bottom: -15px;
+    margin-top: -10px;
+}
+
+.schedule-lesson {
+    background: #79ad3e;
+    padding: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #fff;
+    border-bottom: 1px solid #639239;
+    margin-bottom: 15px;
+}
+
+.schedule-lesson .info {
+    display: inline-block;
+    color: rgb(208, 255, 120);
+}
+
+.schedule-day {
+    margin-bottom: 15px;
+}
+
+.alert-top {
+    display: none;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+}
+
+.olympiad-student-fio-elem {
+    cursor: pointer;
+}
+
+.day-of-week {
+    font-size: 12px;
+    color: gray;
+}
