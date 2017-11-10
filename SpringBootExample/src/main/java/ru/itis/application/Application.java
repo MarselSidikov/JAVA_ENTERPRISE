@@ -21,7 +21,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("ru.itis")
 @EnableJpaRepositories(basePackages = "ru.itis.repositories")
 @EntityScan(basePackages = "ru.itis.models")
-@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 public class Application {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);

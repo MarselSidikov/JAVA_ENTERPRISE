@@ -1,6 +1,7 @@
 package ru.itis.models;
 
 import lombok.*;
+import ru.itis.security.role.Role;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -39,5 +40,8 @@ public class User {
     private String login;
 
     private String hashPassword;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }

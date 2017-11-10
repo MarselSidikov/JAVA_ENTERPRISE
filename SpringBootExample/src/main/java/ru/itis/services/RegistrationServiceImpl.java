@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.forms.UserRegistrationForm;
 import ru.itis.models.User;
 import ru.itis.repositories.UsersRepository;
+import ru.itis.security.role.Role;
 
 /**
  * 10.11.2017
@@ -28,6 +29,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         User newUser = User.builder()
                 .login(userForm.getLogin())
                 .hashPassword(passwordEncoder.encode(userForm.getPassword()))
+                .role(Role.USER)
                 .build();
         usersRepository.save(newUser);
     }
