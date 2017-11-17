@@ -29,7 +29,7 @@ public class AdminController {
     @GetMapping("/password/temp/{user-id}")
     public String getNewPasswordOfUserPage(@ModelAttribute("model") ModelMap model,
                                            @PathVariable("user-id") Long userId) {
-        model.addAttribute("tempPassword", service.createTempPassword(userId));
+        service.createTempPassword(userId);
         return "temp_password_page";
     }
 }

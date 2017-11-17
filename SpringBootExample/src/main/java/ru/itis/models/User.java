@@ -46,4 +46,6 @@ public class User {
 
     private String hashTempPassword;
 
+    private String email;
+
 }
