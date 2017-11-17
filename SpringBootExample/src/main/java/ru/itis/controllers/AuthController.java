@@ -7,11 +7,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.itis.models.User;
 import ru.itis.security.details.UserDetailsImpl;
+import ru.itis.security.role.Role;
 import ru.itis.services.AuthenticationService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * 10.11.2017
@@ -47,7 +50,12 @@ public class AuthController {
     @GetMapping("/")
     public String root(Authentication authentication) {
         if (authentication != null) {
-            return "redirect:/user/profile";
+            User user = service.getUserByAuthentication(authentication);
+            if (user.getRole().equals(Role.USER)) {
+                return "redirect:/user/profile";
+            } else if (user.getRole().equals(Role.ADMIN)) {
+                return "redirect:/admin/users";
+            }
         }
         return "redirect:/login";
     }
@@ -57,6 +65,4 @@ public class AuthController {
         model.addAttribute(service.getUserByAuthentication(authentication));
         return "profile";
     }
-
-
 }
