@@ -2,6 +2,7 @@ package ru.itis.models;
 
 import lombok.*;
 import ru.itis.security.role.Role;
+import ru.itis.security.states.State;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -43,6 +44,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private State state;
 
     private String hashTempPassword;
 
