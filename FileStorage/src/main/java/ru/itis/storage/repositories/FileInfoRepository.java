@@ -11,4 +11,5 @@ import ru.itis.storage.models.FileInfo;
  * @version v1.0
  */
 public interface FileInfoRepository extends JpaRepository<FileInfo, Long> {
+    FileInfo findOneByStorageFileName(String storageFileName);
 }

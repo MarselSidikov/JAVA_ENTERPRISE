@@ -11,6 +11,8 @@ import ru.itis.storage.repositories.FileInfoRepository;
 import ru.itis.storage.utils.FileStorageUtil;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -43,8 +45,16 @@ public class FileStorageServiceImpl implements FileStorageService {
         return fileInfo.getStorageFileName();
     }
 
+    @SneakyThrows
     @Override
     public void writeFileToResponse(String fileName, HttpServletResponse response) {
-
+        FileInfo file = fileInfoRepository.findOneByStorageFileName(fileName);
+        response.setContentType(file.getType());
+        // получили инпут стрим файла на диске
+        InputStream inputStream = new FileInputStream(new java.io.File(file.getUrl()));
+        // скопировали файл в ответ
+        org.apache.commons.io.IOUtils.copy(inputStream, response.getOutputStream());
+        // пробрасываем буфер
+        response.flushBuffer();
     }
 }
