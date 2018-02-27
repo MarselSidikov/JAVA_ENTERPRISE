@@ -26,11 +26,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void register(UserRegistrationForm userForm) {
+        // создаем нового пользователя для БД с ролью USER
         User newUser = User.builder()
                 .login(userForm.getLogin())
                 .hashPassword(passwordEncoder.encode(userForm.getPassword()))
                 .role(Role.USER)
                 .build();
+        // сохраняем пользователя
         usersRepository.save(newUser);
     }
 }

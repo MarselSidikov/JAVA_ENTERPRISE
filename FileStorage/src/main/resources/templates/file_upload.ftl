@@ -12,7 +12,7 @@
 </script>
 <div>
     <input type="file" id="file" name="file" placeholder="Имя файла..."/>
-    <button onclick="sendFile(($('#file'))[0]['files'][0])"
+    <button onclick="sendFile(($('#file'))[0]['file'][0])"
             class="btn btn-primary">Загрузить файл
     </button>
     <input type="hidden" id="file_hidden">
