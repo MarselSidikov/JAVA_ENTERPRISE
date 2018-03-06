@@ -8,6 +8,7 @@
 <#if model.error.isPresent()>
 <div class="alert alert-danger" role="alert">Логин или пароль введены неверно</div>
 </#if>
+ПРИВЕТ!
 <div class="content-block">
     <form class="form-horizontal" action="/login" method="post">
         <input name="login" placeholder="Логин">
