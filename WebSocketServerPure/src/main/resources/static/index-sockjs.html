@@ -1,0 +1,81 @@
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>WebSocket Tester SockJs</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+    <script language = "javascript" type="text/javascript">
+        jQuery(function ($) {
+
+            function writeStatus(message) {
+                $("#statusOutput").val($("#statusOutput").val() + message + '\n');
+            }
+
+            function writeMessage(message) {
+                $('#messageOutput').append(message + '\n');
+            }
+            $ ( '#connect' )
+                    .click(function doConnect() {
+                        websocket = new SockJS($("#target").val());
+
+                        websocket.onopen = function (evt) {
+                            writeStatus("CONNECTED");
+                        };
+
+                        websocket.onclose = function(evt) {
+                            writeStatus("DISCONNECTED");
+                        };
+
+                        websocket.onmessage = function(evt) {
+                            writeMessage('ECHO: ' + evt.data);
+                        };
+
+                        websocket.onerror = function (evt) {
+                            onError(writeStatus('ERROR:' + evt.data))
+                        };
+                    }) ;
+
+
+            $ ('#disconnect')
+                    .click(function () {
+                        if (typeof websocket != 'undefined') {
+                            websocket.close();
+                            websocket = undefined;
+                        } else {
+                            alert("Not connected.");
+                        }
+
+                    }) ;
+
+            $ ('#send')
+                    .click(function () {
+                        if(typeof websocket != 'undefined') {
+                            websocket.send($('#message').val());
+                        } else {
+                            alert("Not connected.");
+                        }
+                    });
+        }) ;
+    </script>
+</head>
+<body>
+
+<h2>WebSocket Tester</h2>
+Target:
+<input type="text" id="target" size="40" value="http://localhost:8080/echoHandler"/>
+<br/>
+<button id="connect">Connect</button>
+<button id="disconnect">Disconnect</button>
+<br/>
+<br/>USER_ID:
+<input type="text" id="user_id" value=""/>
+<br/>Message:
+<input type="text" id="message" value=""/>
+<button id = "send">Send</button>
+<br/>
+<p>Status output:</p>
+<pre><textarea id="statusOutput" rows = "lO" cols = "SO"></textarea></pre>
+<p>Message output:</p>
+<pre><textarea id="messageOutput" rows="lO" cols="SO"></textarea></pre>
+</body>
+</html>
