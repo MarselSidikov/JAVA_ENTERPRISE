@@ -24,7 +24,7 @@ public class VkUsersController {
     @Autowired
     private VkUsersService service;
 
-    @GetMapping("/users/{user-id}")
+    @GetMapping("users/{user-id}")
     public ResponseEntity<VkUser> getUserById(@PathVariable("user-id") Long userId) {
         return ResponseEntity.ok(service.getUser(userId));
     }
