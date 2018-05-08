@@ -9,6 +9,8 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * 03.11.2017
@@ -21,12 +23,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan("ru.itis")
 @EnableJpaRepositories(basePackages = "ru.itis.rest.repositories")
 @EntityScan(basePackages = "ru.itis.rest.models", basePackageClasses = Jsr310JpaConverters.class)
-public class Application {
+public class Application extends WebMvcConfigurerAdapter {
     public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args).getBean("passwordEncoder", PasswordEncoder.class);
 
-        PasswordEncoder encoder = SpringApplication.run(Application.class, args).getBean("passwordEncoder", PasswordEncoder.class);
-        System.out.println(encoder.encode("qwerty007"));
+    }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
     }
 
     @Bean

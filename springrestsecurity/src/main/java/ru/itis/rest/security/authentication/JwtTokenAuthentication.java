@@ -7,29 +7,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 /**
- * 17.04.2018
- * TokenAuthentication
+ * 28.04.2018
+ * JwtTokenAuthentication
  *
  * @author Sidikov Marsel (First Software Engineering Platform)
  * @version v1.0
  */
+public class JwtTokenAuthentication implements Authentication {
 
-/**
- * Класс, описывающий аутентификацию по токену.
- */
-public class TokenAuthentication implements Authentication {
-
-    private String token;
     private boolean isAuthenticated;
     private UserDetails userDetails;
+    private String token;
 
-
-    public TokenAuthentication(String token) {
+    public JwtTokenAuthentication(String token) {
         this.token = token;
-    }
-
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
     }
 
     @Override
@@ -59,11 +50,15 @@ public class TokenAuthentication implements Authentication {
 
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-        this.isAuthenticated  = isAuthenticated;
+        this.isAuthenticated = isAuthenticated;
     }
 
     @Override
     public String getName() {
         return token;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 }

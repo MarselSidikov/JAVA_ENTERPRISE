@@ -19,7 +19,7 @@ import java.util.List;
  * @version v1.0
  */
 @RestController
-@RequestMapping("/rest/user")
+@RequestMapping("/user")
 public class UsersController {
 
     @Autowired

@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.itis.rest.models.User;
+import ru.itis.rest.security.role.Role;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,6 +23,14 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(User user) {
         this.user = user;
+    }
+
+    public UserDetailsImpl(Long id, String role, String login) {
+        this.user = User.builder()
+                .id(id)
+                .role(Role.valueOf(role))
+                .login(login)
+                .build();
     }
 
     @Override

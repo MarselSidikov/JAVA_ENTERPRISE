@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 import ru.itis.rest.security.authentication.TokenAuthentication;
 import ru.itis.rest.services.TokenService;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,44 +25,38 @@ import java.io.IOException;
  */
 
 /**
- * Фильтр преобразует запрос в объект аутентификации
+ * Фильтр, вытаскивает токен из запроса
+ * Создает объект аутентификации, далее передает
+ * этот объект спрингу
  */
 @Component
-public class TokenAuthFilter extends AbstractAuthenticationProcessingFilter {
-    protected TokenAuthFilter() {
-        super("/rest/**");
-        setAuthenticationSuccessHandler((request, response, authentication) ->
-            SecurityContextHolder.getContext().setAuthentication(authentication));
+public class TokenAuthFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
     }
 
     @Override
-    @Autowired
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
-        super.setAuthenticationManager(authenticationManager);
-    }
-
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
         String token = request.getHeader("Auth-Token");
+        TokenAuthentication authentication;
 
-        if (token == null)
-            token = request.getParameter("token");
         if (token == null) {
-            TokenAuthentication authentication = new TokenAuthentication(null);
-            authentication.setAuthenticated(false);
-            return authentication;
+            token = request.getParameter("token");
         }
 
-        TokenAuthentication authentication = new TokenAuthentication(token);
-        authentication.setAuthenticated(true);
-        authentication = (TokenAuthentication)getAuthenticationManager().authenticate(authentication);
-        return authentication;
+        if (token != null) {
+            authentication = new TokenAuthentication(token);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        super.successfulAuthentication(request, response, chain, authResult);
-        chain.doFilter(request, response);
+    public void destroy() {
+
     }
 }

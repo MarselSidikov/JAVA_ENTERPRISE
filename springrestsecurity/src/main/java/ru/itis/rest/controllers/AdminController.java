@@ -20,7 +20,7 @@ import java.util.List;
  * @version v1.0
  */
 @RestController
-@RequestMapping("/rest/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired

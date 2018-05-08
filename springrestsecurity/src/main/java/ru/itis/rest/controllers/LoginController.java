@@ -23,8 +23,9 @@ public class LoginController {
     @Autowired
     private LoginService service;
 
-    @PostMapping
-    public ResponseEntity<TokenDto> login(@RequestBody LoginPasswordDto loginPassword) {
-        return ResponseEntity.ok(service.login(loginPassword));
+    @PostMapping("/login")
+    public ResponseEntity<TokenDto> login(@RequestBody LoginPasswordDto loginPassword, @RequestParam(value = "jwt",
+            required = false, defaultValue = "false") boolean isJwtEnabled) {
+        return ResponseEntity.ok(service.login(loginPassword, isJwtEnabled));
     }
 }

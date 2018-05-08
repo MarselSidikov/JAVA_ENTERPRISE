@@ -1,6 +1,5 @@
 package ru.itis.rest.services;
 
-import org.springframework.http.ResponseEntity;
 import ru.itis.rest.dto.LoginPasswordDto;
 import ru.itis.rest.dto.TokenDto;
 
@@ -12,6 +11,5 @@ import ru.itis.rest.dto.TokenDto;
  * @version v1.0
  */
 public interface LoginService {
-
-    TokenDto login(LoginPasswordDto loginPassword);
+    TokenDto login(LoginPasswordDto loginPassword, boolean isJwtEnabled);
 }
