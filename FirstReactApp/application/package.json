@@ -1,0 +1,22 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "@expo/samples": "2.1.1",
+    "expo": "^27.0.1",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
+    "react-native-material-buttons": "^0.5.0",
+    "react-native-material-textfield": "^0.12.0",
+    "react-navigation": "2.0.0"
+  },
+  "devDependencies": {
+    "jest-expo": "^27.0.0"
+  }
+}
