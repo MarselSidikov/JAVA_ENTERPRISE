@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Page</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+<div class="container">  
+  <form id="contact" action="/forms" method="post">
+    <h3>Send message to MarselSidikov</h3>
+    <h4>Fill the form</h4>
+    <fieldset>
+      <input name='name' placeholder="Your name" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input name='email' placeholder="Your Email Address" type="email" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input name='phone_number' placeholder="Your Phone Number (optional)" type="tel" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <textarea name='message' placeholder="Type your message here...." tabindex="5" required></textarea>
+    </fieldset>
+    <fieldset>
+      <button type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+  </form>
+</div>
+</body>
+</html>

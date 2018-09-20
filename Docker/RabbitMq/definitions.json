@@ -1,0 +1,50 @@
+{
+	"rabbit_version": "3.6.6",
+	"users": [{
+		"name": "api-user",
+		"password_hash": "tw5q/yH7e3x1b5bb/DLjmadw1n7YyNf3o0ROrggKDtCM2cWQ",
+		"hashing_algorithm": "rabbit_password_hashing_sha256",
+		"tags": ""
+	}, {
+		"name": "admin",
+		"password_hash": "GGZQ0rYktt4ki9cg00L5RsXsfQcKpuzsd4nbdgvqHdha8vjP",
+		"hashing_algorithm": "rabbit_password_hashing_sha256",
+		"tags": "administrator"
+	}],
+	"vhosts": [{
+		"name": "/"
+	}],
+	"permissions": [{
+		"user": "api-user",
+		"vhost": "/",
+		"configure": ".*",
+		"write": ".*",
+		"read": ".*"
+	}],
+	"parameters": [],
+	"policies": [],
+	"queues": [{
+		"name": "demo-queue",
+		"vhost": "/",
+		"durable": true,
+		"auto_delete": false,
+		"arguments": {}
+	}],
+	"exchanges": [{
+		"name": "demo-exchange",
+		"vhost": "/",
+		"type": "topic",
+		"durable": true,
+		"auto_delete": false,
+		"internal": false,
+		"arguments": {}
+	}],
+	"bindings": [{
+		"source": "demo-exchange",
+		"vhost": "/",
+		"destination": "demo-queue",
+		"destination_type": "queue",
+		"routing_key": "",
+		"arguments": {}
+	}]
+}
