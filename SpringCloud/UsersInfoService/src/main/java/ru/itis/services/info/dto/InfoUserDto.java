@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class InfoUserDto {
-    private String userName;
+    private String catUrl;
     private String flagUrl;
 }

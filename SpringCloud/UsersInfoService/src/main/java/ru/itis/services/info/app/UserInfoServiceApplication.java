@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.xmlpull.v1.XmlPullParserException;
@@ -50,14 +51,14 @@ public class UserInfoServiceApplication {
         return new RestTemplate();
     }
 
-    @GetMapping("info/{user-id}")
-    public ResponseEntity<InfoUserDto> getInfoAbout(@PathVariable("user-id") Long userId) {
+    @GetMapping("/users/info")
+    public ResponseEntity<InfoUserDto> getInfoAbout(@RequestParam("name") String name, @RequestParam("country") String country) {
         RestTemplate template = restTemplate();
-        VkUser vkUser = template.getForEntity("http://USER/users/" + userId, VkUser.class).getBody();
-        FlagDto flagDto = template.getForEntity("http://COUNTRY/countries/" + vkUser.getCountry().getTitle(), FlagDto.class).getBody();
+        CatDto catDto = template.getForEntity("http://CAT/cats/search", CatDto.class).getBody();
+        FlagDto flagDto = template.getForEntity("http://COUNTRY/countries/" + country, FlagDto.class).getBody();
         return ResponseEntity.ok(InfoUserDto.builder()
                 .flagUrl(flagDto.getFlag())
-                .userName(vkUser.getFirstName())
+                .catUrl(catDto.getUrl())
                 .build());
     }
 
