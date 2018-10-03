@@ -2,8 +2,8 @@ zuul:
   prefix: /api
   routes:
     user:
-      path: /user/**
-      serviceId: USER
+      path: /cat/**
+      serviceId: CAT
     country:
       path: /country/**
       serviceId: COUNTRY
