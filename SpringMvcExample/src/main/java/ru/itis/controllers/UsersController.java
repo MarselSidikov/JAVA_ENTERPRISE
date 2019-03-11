@@ -1,5 +1,6 @@
 package ru.itis.controllers;
 
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 import ru.itis.dao.HumansDao;
@@ -33,7 +34,6 @@ public class UsersController implements Controller {
 
             modelAndView.addObject("owners", humans);
             modelAndView.setViewName("all_users_page");
-
             return modelAndView;
         }
         return null;
